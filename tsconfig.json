@@ -25,7 +25,15 @@
 		"noPropertyAccessFromIndexSignature": true,
 
 		"outDir": "dist",
-		"types": ["vite", "bun"]
+		"types": ["vite", "bun"],
+
+		// Paths
+		"baseUrl": ".",
+		"paths": {
+			"@config/*": ["./src/config/*"],
+			"@type/*": ["./src/types/*"],
+			"@utils/*": ["./src/utils/*"]
+		}
 	},
 	"include": ["src"]
 }
