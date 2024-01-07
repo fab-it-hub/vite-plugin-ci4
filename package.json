@@ -3,14 +3,33 @@
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
-	"scripts": {},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.mjs",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"./dist/"
+	],
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "bun run build-plugin",
+		"build-plugin": "bun run build-plugin-esm && bun run build-plugin-assets",
+		"build-plugin-assets": "cp ./index.html ./dist/index.html",
+		"build-plugin-esm": "unbuild"
+	},
 	"peerDependencies": {
 		"vite": "^5.0.0"
 	},
 	"devDependencies": {
 		"@types/bun": "^1.0.0",
-		"typescript": "^5.2.2",
-		"vite": "^5.0.10"
+		"@types/node": "^20.10.6",
+		"typescript": "^5.3.3",
+		"unbuild": "^2.0.0",
+		"vite": "^5.0.11"
 	},
 	"dependencies": {
 		"picocolors": "^1.0.0"
