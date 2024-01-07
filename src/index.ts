@@ -22,10 +22,7 @@ const ci4: Ci4 = (_config: string | string[]) => {
 		},
 		configureServer: (server) => {
 			const envDir = config.envDir || process.cwd();
-			const appUrl =
-				loadEnv(config.mode, envDir, "app.baseURL")["app.baseURL"] ?? "undefined";
-
-			console.log(loadEnv(config.mode, envDir, "app.baseURL")["app.baseURL"]);
+			const appUrl = loadEnv(config.mode, envDir, "")["app.baseURL"] ?? "undefined";
 
 			server.httpServer?.once("listening", () => {
 				setTimeout(() => {
@@ -53,7 +50,7 @@ const ci4: Ci4 = (_config: string | string[]) => {
 						res.end(
 							readFileSync(path.join(dirname(), "index.html"))
 								.toString()
-								.replace(/{{ APP_URL }}/g, appUrl)
+								.replace(/{{app.baseURL}}/g, appUrl)
 						);
 					}
 
