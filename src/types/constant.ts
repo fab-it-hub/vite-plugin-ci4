@@ -1,10 +1,14 @@
 export declare interface AppConfig {
-	placeholderRegExp: string | RegExp;
-	packageJsonPath: string;
-	frameworkName: string;
-	composerPath: string;
-	placeholder: string;
+	plugin: string;
 	pluginName: string;
+
 	framework: string;
-	serverEntryPoint: string;
+	frameworkName: string;
+
+	composerPath: string;
+	serverListener: string;
+	packageJsonPath: string;
+
+	placeholder: string;
+	placeholderRegExp: string | RegExp;
 }

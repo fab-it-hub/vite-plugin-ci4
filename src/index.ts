@@ -5,6 +5,7 @@ import {fileURLToPath} from "url";
 import type {ResolvedConfig} from "vite";
 
 import type {Ci4} from "@type/plugin";
+import {appConfig} from "@config/constant";
 import {highlightVersion} from "@utils/decorate";
 import {frameworkVersion, pluginVersion} from "@utils/version";
 
@@ -12,7 +13,7 @@ const ci4: Ci4 = (_config: string | string[]) => {
 	let config: ResolvedConfig;
 
 	return {
-		name: "ci4",
+		name: appConfig.plugin,
 		enforce: "post",
 		config: (userConfig) => {
 			return userConfig;
@@ -22,7 +23,7 @@ const ci4: Ci4 = (_config: string | string[]) => {
 		},
 		configureServer: (server) => {
 			const envDir = config.envDir || process.cwd();
-			const appUrl = loadEnv(config.mode, envDir, "")["app.baseURL"] ?? "undefined";
+			const appUrl = loadEnv(config.mode, envDir, "")[appConfig.placeholder] ?? "undefined";
 
 			server.httpServer?.once("listening", () => {
 				setTimeout(() => {
@@ -30,12 +31,16 @@ const ci4: Ci4 = (_config: string | string[]) => {
 
 					frameworkVersion()
 						.then((version) => {
-							server.config.logger.info(highlightVersion("CodeIgniter", version));
+							server.config.logger.info(
+								highlightVersion(appConfig.frameworkName, version)
+							);
 
 							return pluginVersion();
 						})
 						.then((version) => {
-							server.config.logger.info(highlightVersion("Plugin     ", version));
+							server.config.logger.info(
+								highlightVersion(appConfig.pluginName, version)
+							);
 
 							return version;
 						});
@@ -44,13 +49,13 @@ const ci4: Ci4 = (_config: string | string[]) => {
 
 			return () =>
 				server.middlewares.use((req, res, next) => {
-					if (req.url === "/index.html") {
+					if (req.url === "/" + appConfig.serverListener) {
 						res.statusCode = 404;
 
 						res.end(
-							readFileSync(path.join(dirname(), "index.html"))
+							readFileSync(path.join(dirname(), appConfig.serverListener))
 								.toString()
-								.replace(/{{app.baseURL}}/g, appUrl)
+								.replace(appConfig.placeholderRegExp, appUrl)
 						);
 					}
 
