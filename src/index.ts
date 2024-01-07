@@ -1,11 +1,12 @@
 import path from "path";
-import {loadEnv, type ResolvedConfig} from "vite";
+import {loadEnv} from "vite";
 import {readFileSync} from "fs";
 import {fileURLToPath} from "url";
+import type {ResolvedConfig} from "vite";
 
-import type {Ci4} from "./types/plugin";
-import {highlightVersion} from "./utils/decorate";
-import {frameworkVersion, pluginVersion} from "./utils/version";
+import type {Ci4} from "@type/plugin";
+import {highlightVersion} from "@utils/decorate";
+import {frameworkVersion, pluginVersion} from "@utils/version";
 
 const ci4: Ci4 = (_config: string | string[]) => {
 	let config: ResolvedConfig;

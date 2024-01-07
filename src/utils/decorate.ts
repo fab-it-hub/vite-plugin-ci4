@@ -1,5 +1,5 @@
 import picocolors from "picocolors";
-import type {HighLightError, HighLightVersion} from "../types/decorate";
+import type {HighLightError, HighLightVersion} from "@type/decorate";
 
 export const highLightError: HighLightError = (error, tagLine) => {
 	const e = error as Error;

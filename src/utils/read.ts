@@ -1,6 +1,7 @@
 import {normalizePath} from "vite";
 import {readFile} from "fs/promises";
-import type {IsBunRunning, ReadJsonFile} from "../types/read";
+
+import type {IsBunRunning, ReadJsonFile} from "@type/read";
 
 export const isBunRunning: IsBunRunning = () => typeof process.versions["bun"] !== "undefined";
 

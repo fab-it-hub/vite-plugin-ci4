@@ -1,6 +1,7 @@
 import {readJsonFile} from "./read";
 import {highLightError} from "./decorate";
-import type {GetVersion} from "../types/version";
+
+import type {GetVersion} from "@type/version";
 
 const errorMessage = "version not found, error: ";
 
