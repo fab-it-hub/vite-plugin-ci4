@@ -1,20 +1,14 @@
-import picocolors from "picocolors";
-import type {HighLightError, HighLightVersion} from "@type/decorate";
+import colors from "picocolors";
 
-export const highLightError: HighLightError = (error, tagLine) => {
+export const highLightError = (error: unknown, tagLine: string): string => {
 	const e = error as Error;
 	let highlight: string = "";
 
-	if (typeof tagLine === "string") highlight += picocolors.dim(tagLine);
-	highlight += picocolors.red(e.message);
+	if (typeof tagLine === "string") highlight += colors.dim(tagLine);
+	highlight += colors.red(e.message);
 
 	return highlight;
 };
 
-export const highlightVersion: HighLightVersion = (name, version) => {
-	let highlight: string = "  ";
-	highlight += picocolors.white(picocolors.bold(name));
-	highlight += picocolors.green(" v" + version.replace("v", ""));
-
-	return highlight;
-};
+export const highLightVersion = (name: string, version: string): string =>
+	`  ${colors.white(name)}: ${colors.green(` v${version.replace("v", "")}`)}`;

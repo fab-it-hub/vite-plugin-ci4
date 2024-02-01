@@ -1,24 +1,14 @@
-import {readJsonFile} from "./read";
-import {highLightError} from "./decorate";
+import type { JsonVersion } from "src/types";
+import { readFileAsJson } from "./io";
 
-import {appConfig} from "@config/constant";
-import type {GetVersion} from "@type/version";
+export const getVersions = async (filePath: string, packageName?: string): Promise<JsonVersion> => {
+	const content = await readFileAsJson(filePath);
 
-const errorMessage = "version not found, error: ";
-const {composerPath, packageJsonPath, framework} = appConfig;
-
-export const frameworkVersion: GetVersion = async () => {
-	try {
-		return (await readJsonFile(composerPath, framework)).version;
-	} catch (error) {
-		return highLightError(error, errorMessage);
+	if (typeof packageName === "string" && typeof content.packages !== "undefined") {
+		return content.packages.find(
+			({ name }: JsonVersion) => name === packageName
+		) as JsonVersion;
 	}
-};
 
-export const pluginVersion: GetVersion = async () => {
-	try {
-		return (await readJsonFile(packageJsonPath)).version;
-	} catch (error) {
-		return highLightError(error, errorMessage);
-	}
+	return content;
 };
