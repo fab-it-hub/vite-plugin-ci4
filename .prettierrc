@@ -1,0 +1,21 @@
+{
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "options": {
+        "tabWidth": 4,
+        "useTabs": true,
+        "printWidth": 100,
+        "bracketSpacing": true
+      }
+    },
+    {
+      "files": ["*.json"],
+      "options": {
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    }
+  ]
+}

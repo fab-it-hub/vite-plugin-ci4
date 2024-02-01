@@ -24,9 +24,15 @@
 		"vite": "^5.0.0"
 	},
 	"devDependencies": {
-		"@types/bun": "^1.0.0",
-		"@types/node": "^20.10.6",
-		"typescript": "^5.3.3",
+    "@types/bun": "latest",
+    "@types/minify": "^9.1.4",
+    "@types/node": "^20.11.8",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "minify": "^11.0.1",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3",
 		"unbuild": "^2.0.0",
 		"vite": "^5.0.11"
 	},

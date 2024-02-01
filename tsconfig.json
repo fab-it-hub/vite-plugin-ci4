@@ -1,39 +1,44 @@
 {
-	"compilerOptions": {
-		// enable latest features
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleDetection": "force",
+  "compilerOptions": {
+    // enable latest features
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
 
-		// Bundler mode
-		"moduleResolution": "bundler",
-		"verbatimModuleSyntax": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"declaration": true,
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "declaration": true,
 
-		// Best practices
-		"strict": true,
-		"skipLibCheck": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
 
-		// Some stricter flags
-		"useUnknownInCatchVariables": true,
-		"noPropertyAccessFromIndexSignature": true,
+    // Some stricter flags
+    "noImplicitAny": true,
+    "useUnknownInCatchVariables": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "outDir": "dist",
+    "types": ["vite", "bun"],
 
-		"outDir": "dist",
-		"types": ["vite", "bun"],
-
-		// Paths
-		"baseUrl": ".",
-		"paths": {
-			"@config/*": ["./src/config/*"],
-			"@type/*": ["./src/types/*"],
-			"@utils/*": ["./src/utils/*"]
-		}
-	},
-	"include": ["src"]
+    // Paths
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "paths": {
+      "@config/*": ["./src/config/*"],
+      "@handlers/*": ["./src/handlers/*"],
+      "@plugins/*": ["./src/plugins/*"],
+      "@resolvers/*": ["./src/resolvers/*"],
+      // "@type": ["./src/types/index.ts"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
