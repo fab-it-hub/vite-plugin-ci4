@@ -2,6 +2,8 @@ import type { AddressInfo } from "net";
 import type { ConfigEnv, Plugin, UserConfig } from "vite";
 import type { Config as FullReloadConfig } from "vite-plugin-full-reload";
 
+import type { HTTP_PROTOCOLS } from "@config/http";
+
 export type JsonVersion = Record<"name" | "version", string>;
 
 export interface ComposerJson extends JsonVersion {
@@ -10,7 +12,7 @@ export interface ComposerJson extends JsonVersion {
 
 export type IsAddressInfo = (x?: string | AddressInfo | null) => x is AddressInfo;
 
-export type DevServerUrl = `${"http" | "https"}://${string}:${number}`;
+export type DevServerUrl = `${HTTP_PROTOCOLS}://${string}:${number}`;
 
 export interface AppConfig {
 	hotFile: string;
