@@ -1,8 +1,30 @@
 {
   "name": "@fabithub/vite-plugin-ci4",
-  "private": true,
   "version": "0.0.1",
+  "description": "Vite Plugin for CodeIgniter 4 integration.",
+  "keywords": [
+    "vite",
+    "ci4",
+    "codeigniter",
+    "inertia",
+    "plugin"
+  ],
+  "homepage": "https://github.com/fab-it-hub/vite-plugin-ci4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fab-it-hub/vite-plugin-ci4"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Krishna Gujjjar",
+    "email": "krishnagujjjar@gmail.com",
+    "url": "https://fabithub.com"
+  },
   "type": "module",
+  "packageManager": "bun@1.0.25",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
