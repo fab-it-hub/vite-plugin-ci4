@@ -4,8 +4,17 @@ import { access, constants, readFile, rm, writeFile } from "fs/promises";
 import type { ComposerJson } from "src/types";
 import { isBunRunning } from "./bun";
 
-export const isFileExists = async (path: string): Promise<boolean | void> =>
-	isBunRunning() ? await Bun.file(path).exists() : await access(path, constants.F_OK);
+export const isFileExists = async (path: string): Promise<boolean> => {
+	try {
+		// Check if we are running in Bun environment.
+		return isBunRunning()
+			? await Bun.file(path).exists() // Use Bun's `file` API to check if the file exists.
+			: typeof (await access(path, constants.F_OK)) === "undefined"; // Use Node.js's `access` API to check if the file exists.
+	} catch (error) {
+		// If any error occurs, return false.
+		return false;
+	}
+};
 
 export const readFileAsJson = async (filePath: string): Promise<ComposerJson> => {
 	const path = normalizePath(filePath);
