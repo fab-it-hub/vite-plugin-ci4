@@ -10,7 +10,7 @@ export const isFileExists = async (path: string): Promise<boolean | void> =>
 export const readFileAsJson = async (filePath: string): Promise<ComposerJson> => {
 	const path = normalizePath(filePath);
 
-	if (!isFileExists(path)) {
+	if (!(await isFileExists(path))) {
 		throw new Error(path + " not found.");
 	}
 
@@ -22,7 +22,7 @@ export const readFileAsJson = async (filePath: string): Promise<ComposerJson> =>
 export const readFileAsString = async (filePath: string): Promise<string> => {
 	const path = normalizePath(filePath);
 
-	if (!isFileExists(path)) {
+	if (!(await isFileExists(path))) {
 		throw new Error(path + " not found.");
 	}
 
@@ -32,17 +32,17 @@ export const readFileAsString = async (filePath: string): Promise<string> => {
 export const writingFile = async (filePath: string, content: string): Promise<number | void> => {
 	const path = normalizePath(filePath);
 
-	if (!isFileExists(path)) {
+	if (!(await isFileExists(path))) {
 		throw new Error(path + " not found.");
 	}
 
 	return isBunRunning() ? await Bun.write(path, content) : await writeFile(path, content);
 };
 
-export const removeFile = (filepath: string): Promise<void> => {
+export const removeFile = async (filepath: string): Promise<void> => {
 	const path = normalizePath(filepath);
 
-	if (!isFileExists(path)) {
+	if (!(await isFileExists(path))) {
 		throw new Error(path + " not found.");
 	}
 
