@@ -1,0 +1,11 @@
+{
+    "cSpell.words": [
+      "bumpp",
+      "linebreak",
+      "outdir",
+      "outfile",
+      "picocolors",
+      "postbuild"
+    ],
+    "conventionalCommits.scopes": ["deps", "src", "docs", "build","utils","config"]
+  }
