@@ -16,26 +16,32 @@ export const isFileExists = async (path: string): Promise<boolean> => {
 	}
 };
 
-export const readFileAsJson = async (filePath: string): Promise<ComposerJson> => {
+export const readFileAsString = async (filePath: string): Promise<string> => {
+	// Normalize the file path to ensure it is in a consistent format.
 	const path = normalizePath(filePath);
 
+	// Check if the file exists.
 	if (!(await isFileExists(path))) {
 		throw new Error(path + " not found.");
 	}
 
-	return isBunRunning()
-		? await Bun.file(path).json()
-		: JSON.parse((await readFile(path)).toString());
+	// Read the file contents.
+	return isBunRunning() ? await Bun.file(path).text() : (await readFile(path)).toString();
 };
 
-export const readFileAsString = async (filePath: string): Promise<string> => {
-	const path = normalizePath(filePath);
-
-	if (!(await isFileExists(path))) {
-		throw new Error(path + " not found.");
+export const readFileAsJson = async (filePath: string): Promise<ComposerJson | undefined> => {
+	try {
+		// Parse the file contents as a JSON object.
+		return JSON.parse(await readFileAsString(filePath)) as ComposerJson;
+	} catch (error: unknown) {
+		// If the error is a SyntaxError, it means that the file is not a valid JSON file.
+		if (error instanceof Error && error.name === "SyntaxError") {
+			throw new Error("It is not a valid Json file.");
+		} else {
+			// Otherwise, rethrow the error.
+			throw error;
+		}
 	}
-
-	return isBunRunning() ? await Bun.file(path).text() : (await readFile(path)).toString();
 };
 
 export const writingFile = async (filePath: string, content: string): Promise<number | void> => {
