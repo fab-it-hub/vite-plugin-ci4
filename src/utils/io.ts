@@ -58,14 +58,22 @@ export const writingFile = async (filePath: string, content: string): Promise<bo
 	}
 };
 
-export const removeFile = async (filepath: string): Promise<void> => {
+export const removeFile = async (filepath: string): Promise<boolean> => {
+	// Normalize the file path to ensure that it is in a consistent format.
 	const path = normalizePath(filepath);
 
+	// Check if the file exists before attempting to remove it.
 	if (!(await isFileExists(path))) {
 		throw new Error(path + " not found.");
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-expect-error
-	return isBunRunning() ? unlink(path) : rm(path, { force: true });
+	// Attempt to remove the file.
+	try {
+		// Use the `rm` function from the `fs/promises` library to remove the file.
+		// The `force` option is used to ensure that the file is removed, even if it is read-only.
+		return typeof (await rm(path, { force: true })) === "undefined";
+	} catch (error: unknown) {
+		// If an error occurred while attempting to remove the file, return `false`.
+		return false;
+	}
 };
