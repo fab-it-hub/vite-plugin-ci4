@@ -43,14 +43,19 @@ export const readFileAsJson = async (filePath: string): Promise<ComposerJson | u
 	}
 };
 
-export const writingFile = async (filePath: string, content: string): Promise<number | void> => {
+export const writingFile = async (filePath: string, content: string): Promise<boolean> => {
+	// Normalize the file path to ensure that it uses the correct separators for the current platform.
 	const path = normalizePath(filePath);
 
-	if (!(await isFileExists(path))) {
-		throw new Error(path + " not found.");
+	try {
+		// Check if we are running in the Bun environment.
+		return isBunRunning()
+			? (await Bun.write(path, content)) > 0 // Return true if the number of bytes written is greater than 0.
+			: typeof (await writeFile(path, content)) === "undefined"; // Return true, as it does not return a value.
+	} catch (error: unknown) {
+		// If an error occurred while writing the file, return false.
+		return false;
 	}
-
-	return isBunRunning() ? await Bun.write(path, content) : await writeFile(path, content);
 };
 
 export const removeFile = async (filepath: string): Promise<void> => {
