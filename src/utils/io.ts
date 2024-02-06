@@ -10,7 +10,7 @@ export const isFileExists = async (path: string): Promise<boolean> => {
 		return isBunRunning()
 			? await Bun.file(path).exists() // Use Bun's `file` API to check if the file exists.
 			: typeof (await access(path, constants.F_OK)) === "undefined"; // Use Node.js's `access` API to check if the file exists.
-	} catch (error) {
+	} catch (error: unknown) {
 		// If any error occurs, return false.
 		return false;
 	}
@@ -35,12 +35,11 @@ export const readFileAsJson = async (filePath: string): Promise<ComposerJson | u
 		return JSON.parse(await readFileAsString(filePath)) as ComposerJson;
 	} catch (error: unknown) {
 		// If the error is a SyntaxError, it means that the file is not a valid JSON file.
-		if (error instanceof Error && error.name === "SyntaxError") {
-			throw new Error("It is not a valid Json file.");
-		} else {
-			// Otherwise, rethrow the error.
-			throw error;
+		if (error instanceof SyntaxError) {
+			throw new SyntaxError("It is not a valid Json file.");
 		}
+		// Otherwise, rethrow the error.
+		throw error;
 	}
 };
 
