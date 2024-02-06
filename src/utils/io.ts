@@ -29,7 +29,7 @@ export const readFileAsString = async (filePath: string): Promise<string> => {
 	return isBunRunning() ? await Bun.file(path).text() : (await readFile(path)).toString();
 };
 
-export const readFileAsJson = async (filePath: string): Promise<ComposerJson | undefined> => {
+export const readFileAsJson = async (filePath: string): Promise<ComposerJson> => {
 	try {
 		// Parse the file contents as a JSON object.
 		return JSON.parse(await readFileAsString(filePath)) as ComposerJson;
