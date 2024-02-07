@@ -1,14 +1,10 @@
 import colors from "picocolors";
+import type { JsonVersion } from "src/types";
 
-export const highLightError = (error: unknown, tagLine: string): string => {
-	const e = error as Error;
-	let highlight: string = "";
-
-	if (typeof tagLine === "string") highlight += colors.dim(tagLine);
-	highlight += colors.red(e.message);
-
-	return highlight;
+export const highlighter = (plugins: JsonVersion[]): string => {
+	let versionString = "";
+	for (const plugin of plugins) {
+		versionString = `  ${colors.green("➜")}  ${colors.white(plugin.name)}: ${colors.cyan(`v${plugin.version.replace("v", "")}`)}`;
+	}
+	return versionString;
 };
-
-export const highLightVersion = (name: string, version: string): string =>
-	`  ${colors.white(name)}: ${colors.green(` v${version.replace("v", "")}`)}`;
