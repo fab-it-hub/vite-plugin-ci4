@@ -17,7 +17,9 @@ export const isIpv6 = (address: AddressInfo): boolean => {
 	);
 };
 
-export const currentDirectory = (): string => {
+export const getCurrentPath = (): string => {
 	const path = new URL(".", import.meta.url);
 	return isBunRunning() ? Bun.fileURLToPath(path) : fileURLToPath(path);
 };
+
+export const addSlash = (path: string): string => path.replace(/\/?$/, "/");
