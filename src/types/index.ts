@@ -31,6 +31,7 @@ export interface AppConfig {
 
 	framework: string;
 	frameworkName: string;
+	frameworkCompatibleVersion: string;
 
 	composerPath: string;
 	serverListener: string;
