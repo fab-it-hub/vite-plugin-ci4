@@ -1,27 +1,24 @@
 import type { ViteDevServer } from "vite";
 
-import { appConfig } from "@config/constant";
-import { getVersions } from "@utils/version";
-import { highLightError, highLightVersion } from "@utils/decorate";
+import { getFrameworkVersion } from "@utils/version";
+import { highlighter } from "@utils/decorate";
+import packageJson from "./../../package.json";
 
 export const _handleLogger = (server: ViteDevServer): void => {
 	setTimeout(() => {
 		server.config.logger.info("");
 
-		getVersions(appConfig.composerPath, appConfig.framework)
+		getFrameworkVersion()
 			.then((framework) => {
-				server.config.logger.info(
-					highLightVersion(appConfig.frameworkName, framework.version)
-				);
-				return getVersions(appConfig.packageJsonPath);
-			})
-			.then((plugin) => {
-				server.config.logger.info(highLightVersion(appConfig.pluginName, plugin.version));
+				if (server.resolvedUrls) {
+					server.config.logger.info(highlighter([framework, packageJson]));
+				}
 
-				return plugin;
+				return framework;
 			})
 			.catch((error) => {
-				return highLightError(error, "version not found, error: ");
+				server.config.logger.error(error);
+				server.close();
 			});
 	}, 100);
 };
