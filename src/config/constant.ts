@@ -29,6 +29,7 @@ export const appConfig: AppConfig = {
 
 	// Framework
 	frameworkName: "CodeIgniter",
+	frameworkCompatibleVersion: "4.1.5",
 	framework: "codeigniter4/framework",
 
 	// Manifests

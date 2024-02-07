@@ -1,10 +1,14 @@
-import { _cleaner } from "./_fileCleaner";
+import { removeFile } from "@utils/io";
+import { joinPaths } from "@utils/string";
+import { appConfig } from "@config/constant";
 
 export const _handleExitProcess = () => {
-	process.on("exit", _cleaner);
+	const { hotFile, publicDirectory } = appConfig;
+
 	process.on("SIGINT", _exitProcess);
-	process.on("SIGTERM", _exitProcess);
 	process.on("SIGHUP", _exitProcess);
+	process.on("SIGTERM", _exitProcess);
+	process.on("exit", () => removeFile(joinPaths(publicDirectory, hotFile)).catch(console.error));
 };
 
 const _exitProcess = (): never => process.exit();

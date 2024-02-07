@@ -12,7 +12,7 @@ import { minify } from "minify";
 	});
 
 	if (!bundler.success) {
-		console.error("Error: Something went wrong with building library!");
+		console.error("Error: Something went wrong with building library!", bundler.logs);
 		return;
 	}
 

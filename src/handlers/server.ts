@@ -4,7 +4,7 @@ import { writingFile } from "@utils/io";
 import { joinPaths } from "@utils/string";
 import { isAddressInfo } from "@utils/uri";
 import { appConfig } from "@config/constant";
-import { highLightError } from "@utils/decorate";
+import { Errors, errorMessages } from "@utils/errors";
 
 import { _handleLogger } from "./_logger";
 import { _devServerUrl } from "./_devServerUrl";
@@ -23,12 +23,10 @@ export const handleConfigureServer = (
 
 		if (isAddressInfo(address)) {
 			writingFile(hotFilePath, _devServerUrl(config, server, address))
-				.then(() => {
-					_handleLogger(server);
-				})
-				.catch((error) => {
-					highLightError(error, "unable to create hotFile");
-					return error;
+				.then(() => _handleLogger(server))
+				.catch(() => {
+					server.config.logger.error(errorMessages(Errors.UnableToWriteHotFile));
+					server.close();
 				});
 		}
 	});
