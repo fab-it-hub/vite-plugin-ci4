@@ -1,3 +1,4 @@
+import { getCurrentPath } from "@utils/uri";
 import type { AppConfig } from "src/types";
 
 export const appConfig: AppConfig = {
@@ -44,5 +45,5 @@ export const appConfig: AppConfig = {
 	// Paths
 	serverListener: "index.html",
 	composerPath: "composer.lock",
-	packageJsonPath: "./package.json"
+	packageJsonPath: getCurrentPath() + "../package.json"
 };
