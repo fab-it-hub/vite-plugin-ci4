@@ -38,9 +38,9 @@ export const appConfig: AppConfig = {
 	ssrManifestPath: "manifest.json",
 
 	// Placeholders
-	assets: "app.assetURL",
-	placeholder: "app.baseURL",
-	placeholderRegExp: /{{app.baseURL}}/g,
+	assets: "app_assetURL",
+	placeholder: "app_baseURL",
+	placeholderRegExp: /{{app_baseURL}}/g,
 
 	// Paths
 	serverListener: "index.html",
