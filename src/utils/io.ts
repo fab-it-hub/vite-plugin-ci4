@@ -26,17 +26,25 @@ export const readFileAsString = async (filePath: string): Promise<string> => {
 	}
 
 	// Read the file contents.
-	return isBunRunning() ? await Bun.file(path).text() : (await readFile(path)).toString();
+	const content = isBunRunning()
+		? await Bun.file(path).text()
+		: (await readFile(path)).toString();
+
+	if (typeof content !== "string") {
+		return JSON.stringify(content);
+	}
+
+	return content;
 };
 
 export const readFileAsJson = async (filePath: string): Promise<ComposerJson> => {
 	try {
 		// Parse the file contents as a JSON object.
-		return JSON.parse(await readFileAsString(filePath)) as ComposerJson;
+		return JSON.parse(await readFileAsString(filePath));
 	} catch (error: unknown) {
 		// If the error is a SyntaxError, it means that the file is not a valid JSON file.
 		if (error instanceof SyntaxError) {
-			throw new SyntaxError("It is not a valid Json file.");
+			throw new SyntaxError("It is not a valid Json file.", { cause: error.message });
 		}
 		// Otherwise, rethrow the error.
 		throw error;
