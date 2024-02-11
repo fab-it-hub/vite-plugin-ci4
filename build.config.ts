@@ -4,11 +4,11 @@ import { minify } from "minify";
 	console.log("\n🛠️  Starting building library... \n");
 	const bundler = await Bun.build({
 		minify: true,
+		target: "bun",
 		outdir: "./dist",
-		target: "node",
 		sourcemap: "none",
 		entrypoints: ["./src/index.ts"],
-		external: ["vite", "picocolors", "vite-plugin-full-reload"]
+		external: ["vite", "semver", "picocolors", "vite-plugin-full-reload"]
 	});
 
 	if (!bundler.success) {
@@ -34,9 +34,7 @@ import { minify } from "minify";
 		return;
 	}
 
-	await Bun.write("./dist/index.html", compressHtml, {
-		createPath: true
-	});
+	await Bun.write("./dist/index.html", compressHtml, { createPath: true });
 
 	console.log("✅ Library build successfully.");
 })();
