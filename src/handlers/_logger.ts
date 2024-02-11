@@ -7,20 +7,13 @@ export const _handleLogger = (server: ViteDevServer): void => {
 	setTimeout(() => {
 		server.config.logger.info("");
 
-		getFrameworkVersion()
-			.then((framework) => {
+		Promise.all([getFrameworkVersion(), getPluginVersion()])
+			.then((values) => {
 				if (server.resolvedUrls) {
-					server.config.logger.info(highlighter(framework));
+					for (const value of values) {
+						server.config.logger.info(highlighter(value));
+					}
 				}
-
-				return getPluginVersion();
-			})
-			.then((plugin) => {
-				if (server.resolvedUrls) {
-					server.config.logger.info(highlighter(plugin));
-				}
-
-				return plugin;
 			})
 			.catch((error) => {
 				server.config.logger.error(error);
