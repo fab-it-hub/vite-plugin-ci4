@@ -1,4 +1,4 @@
-import semver from "semver/functions/gt";
+import { lt } from "semver";
 
 import { appConfig } from "@config/constant";
 import type { JsonVersion } from "src/types";
@@ -9,7 +9,7 @@ export const getFrameworkVersion = async (): Promise<JsonVersion> => {
 		({ name }) => name === appConfig.framework
 	) as JsonVersion;
 
-	if (!semver(framework.version, appConfig.frameworkCompatibleVersion)) {
+	if (lt(framework.version, appConfig.frameworkCompatibleVersion)) {
 		throw new Error(
 			`CompatibilityError: ${framework.name}@${framework.version} is not compatible with ${appConfig.pluginName}. Use ${appConfig.frameworkName}@${appConfig.frameworkCompatibleVersion}`,
 			{ cause: "CompatibilityError" }
