@@ -18,3 +18,6 @@ export const getFrameworkVersion = async (): Promise<JsonVersion> => {
 
 	return framework;
 };
+
+export const getPluginVersion = async (): Promise<JsonVersion> =>
+	await readFileAsJson(appConfig.packageJsonPath);

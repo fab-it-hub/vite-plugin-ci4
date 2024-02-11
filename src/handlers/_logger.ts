@@ -1,8 +1,7 @@
 import type { ViteDevServer } from "vite";
 
-import { getFrameworkVersion } from "@utils/version";
 import { highlighter } from "@utils/decorate";
-import packageJson from "./../../package.json";
+import { getFrameworkVersion, getPluginVersion } from "@utils/version";
 
 export const _handleLogger = (server: ViteDevServer): void => {
 	setTimeout(() => {
@@ -11,10 +10,17 @@ export const _handleLogger = (server: ViteDevServer): void => {
 		getFrameworkVersion()
 			.then((framework) => {
 				if (server.resolvedUrls) {
-					server.config.logger.info(highlighter([framework, packageJson]));
+					server.config.logger.info(highlighter(framework));
 				}
 
-				return framework;
+				return getPluginVersion();
+			})
+			.then((plugin) => {
+				if (server.resolvedUrls) {
+					server.config.logger.info(highlighter(plugin));
+				}
+
+				return plugin;
 			})
 			.catch((error) => {
 				server.config.logger.error(error);
