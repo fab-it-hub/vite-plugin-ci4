@@ -4,7 +4,7 @@ import type { ResolvedConfig } from "vite";
 import { isIpv6 } from "@utils/uri";
 import { HTTP_PROTOCOLS } from "@config/http";
 
-export const _getServerUrl = (address: AddressInfo, config: ResolvedConfig): string => {
+export const _getDevServerUrl = (address: AddressInfo, config: ResolvedConfig): string => {
 	const configHmrProtocol =
 		typeof config.server.hmr === "object" ? config.server.hmr.protocol : null;
 	const clientProtocol = configHmrProtocol
@@ -24,5 +24,5 @@ export const _getServerUrl = (address: AddressInfo, config: ResolvedConfig): str
 		typeof config.server.hmr === "object" ? config.server.hmr.clientPort : null;
 	const port = configHmrClientPort ?? address.port;
 
-	return `${protocol}://${host}:${port}`;
+	return config.server?.origin ?? `${protocol}://${host}:${port}`;
 };
