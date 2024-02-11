@@ -20,6 +20,10 @@ export const resolvePluginConfig = (
 	}
 
 	if (typeof config.publicDirectory === "string") {
+		if (config.publicDirectory.length > 1000) {
+			throw new Error(errorMessages(Errors.TooLongPublicDirectoryInput));
+		}
+
 		config.publicDirectory = config.publicDirectory.trim().replace(/^\/+/, "");
 
 		if (config.publicDirectory === "") {
@@ -28,6 +32,10 @@ export const resolvePluginConfig = (
 	}
 
 	if (typeof config.buildDirectory === "string") {
+		if (config.buildDirectory.length > 1000) {
+			throw new Error(errorMessages(Errors.TooLongBuildDirectoryInput));
+		}
+
 		config.buildDirectory = config.buildDirectory
 			.trim()
 			.replace(/^\/+/, "")
@@ -39,6 +47,10 @@ export const resolvePluginConfig = (
 	}
 
 	if (typeof config.ssrOutputDirectory === "string") {
+		if (config.ssrOutputDirectory.length > 1000) {
+			throw new Error(errorMessages(Errors.TooLongSsrOutputDirectoryInput));
+		}
+
 		config.ssrOutputDirectory = config.ssrOutputDirectory
 			.trim()
 			.replace(/^\/+/, "")

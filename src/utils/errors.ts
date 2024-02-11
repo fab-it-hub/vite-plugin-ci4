@@ -6,7 +6,10 @@ export enum Errors {
 	UnableToWriteHotFile,
 	InvalidConfiguration,
 	InvalidBuildSubDirectory,
-	InvalidPublicSubDirectory
+	InvalidPublicSubDirectory,
+	TooLongBuildDirectoryInput,
+	TooLongPublicDirectoryInput,
+	TooLongSsrOutputDirectoryInput
 }
 
 export const errorMessages = (key: Errors): string => {
@@ -14,6 +17,18 @@ export const errorMessages = (key: Errors): string => {
 	let message;
 
 	switch (key) {
+		case Errors.TooLongSsrOutputDirectoryInput:
+			message = `${pluginName}: input too long for 'ssrOutputDirectory'.`;
+			break;
+
+		case Errors.TooLongBuildDirectoryInput:
+			message = `${pluginName}: input too long for 'buildDirectory'.`;
+			break;
+
+		case Errors.TooLongPublicDirectoryInput:
+			message = `${pluginName}: input too long for 'publicDirectory'.`;
+			break;
+
 		case Errors.InvalidInput:
 			message = `${pluginName}: missing configuration for 'input'.`;
 			break;
