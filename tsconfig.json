@@ -25,20 +25,17 @@
     "useUnknownInCatchVariables": true,
     "noPropertyAccessFromIndexSignature": true,
     "outDir": "dist",
-    "types": ["vite", "bun"],
 
     // Paths
     "baseUrl": ".",
-    "rootDir": "./src",
     "paths": {
       "@config/*": ["./src/config/*"],
       "@handlers/*": ["./src/handlers/*"],
       "@plugins/*": ["./src/plugins/*"],
       "@resolvers/*": ["./src/resolvers/*"],
-      // "@type": ["./src/types/index.ts"],
       "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules"]
 }

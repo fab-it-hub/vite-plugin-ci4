@@ -1,24 +1,38 @@
+import { loadEnv } from "vite";
 import type { ViteDevServer } from "vite";
 
-import { getFrameworkVersion } from "@utils/version";
+import { appConfig } from "@config/constant";
 import { highlighter } from "@utils/decorate";
-import packageJson from "./../../package.json";
+import { getFrameworkVersion, getPluginVersion } from "@utils/version";
 
 export const _handleLogger = (server: ViteDevServer): void => {
+	const { placeholder } = appConfig;
+	const { mode, envDir, logger } = server.config;
+	const appUrl = {
+		name: "App Url",
+		version: loadEnv(mode, envDir || process.cwd(), "")[placeholder] ?? "undefined"
+	};
+
 	setTimeout(() => {
-		server.config.logger.info("");
+		logger.info("");
 
-		getFrameworkVersion()
-			.then((framework) => {
+		Promise.all([getFrameworkVersion(), getPluginVersion()])
+			.then((values) => {
 				if (server.resolvedUrls) {
-					server.config.logger.info(highlighter([framework, packageJson]));
+					for (const value of values) {
+						logger.info(
+							highlighter({
+								name: value.name,
+								version: `v${value.version.replace("v", "")}`
+							})
+						);
+					}
 				}
-
-				return framework;
 			})
 			.catch((error) => {
-				server.config.logger.error(error);
+				logger.error(error);
 				server.close();
-			});
+			})
+			.finally(() => logger.info("\n" + highlighter(appUrl)));
 	}, 100);
 };

@@ -23,6 +23,6 @@ export const ci4 = (_config: Required<PluginConfig>): Ci4Plugin => {
 				return _config.transformOnServe(code, devServerUrl);
 			}
 		},
-		configureServer: (server) => handleConfigureServer(server, config)
+		configureServer: handleConfigureServer
 	};
 };

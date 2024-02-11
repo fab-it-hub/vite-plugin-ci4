@@ -1,4 +1,4 @@
-import { type ResolvedConfig, type ViteDevServer } from "vite";
+import type { ViteDevServer } from "vite";
 
 import { writingFile } from "@utils/io";
 import { joinPaths } from "@utils/string";
@@ -7,13 +7,12 @@ import { appConfig } from "@config/constant";
 import { Errors, errorMessages } from "@utils/errors";
 
 import { _handleLogger } from "./_logger";
-import { _devServerUrl } from "./_devServerUrl";
 import { _handleExitProcess } from "./_processes";
+import { _getDevServerUrl } from "./_getDevServerUrl";
 import { _handleDevServer } from "./_handleDevServer";
 
 export const handleConfigureServer = (
-	server: ViteDevServer,
-	config: ResolvedConfig
+	server: ViteDevServer
 ): (() => void) | void | Promise<(() => void) | void> => {
 	const { publicDirectory, hotFile } = appConfig;
 	const hotFilePath = joinPaths(publicDirectory, hotFile);
@@ -22,7 +21,7 @@ export const handleConfigureServer = (
 		const address = server.httpServer?.address();
 
 		if (isAddressInfo(address)) {
-			writingFile(hotFilePath, _devServerUrl(config, server, address))
+			writingFile(hotFilePath, _getDevServerUrl(address, server.config))
 				.then(() => _handleLogger(server))
 				.catch(() => {
 					server.config.logger.error(errorMessages(Errors.UnableToWriteHotFile));
@@ -33,5 +32,5 @@ export const handleConfigureServer = (
 
 	_handleExitProcess();
 
-	return () => _handleDevServer(config, server);
+	return () => _handleDevServer(server);
 };
