@@ -8,17 +8,22 @@ export enum Errors {
 	InvalidBuildSubDirectory,
 	InvalidPublicSubDirectory,
 	TooLongBuildDirectoryInput,
+	CompatibleFrameworkNotFound,
 	TooLongPublicDirectoryInput,
 	TooLongSsrOutputDirectoryInput
 }
 
 export const errorMessages = (key: Errors): string => {
-	const { pluginName, buildDirectory, publicDirectory } = appConfig;
+	const { buildDirectory, composerPath, framework, pluginName, publicDirectory } = appConfig;
 	let message;
 
 	switch (key) {
 		case Errors.TooLongSsrOutputDirectoryInput:
 			message = `${pluginName}: input too long for 'ssrOutputDirectory'.`;
+			break;
+
+		case Errors.CompatibleFrameworkNotFound:
+			message = `${pluginName}: ${framework} not found in ${composerPath}.`;
 			break;
 
 		case Errors.TooLongBuildDirectoryInput:
