@@ -2,6 +2,11 @@
 
 > Vite Plugin for CodeIgniter 4 integration. Inspired by Laravel's Vite Plugin.
 
+
+<!-- BADGIE TIME -->
+<!-- END BADGIE TIME -->
+
+
 ## Introduction
 
 This Vite plugin allows seamless integration of [Vite JS](https://vitejs.dev/) with [CodeIgniter 4](https://codeigniter.com/), providing enhanced development and build processes for your web applications.
