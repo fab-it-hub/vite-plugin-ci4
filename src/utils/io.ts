@@ -28,7 +28,7 @@ export const readFileAsString = async (filePath: string): Promise<string> => {
 	// Read the file contents.
 	const content = isBunRunning()
 		? await Bun.file(path).text()
-		: (await readFile(path)).toString();
+		: await readFile(path, { encoding: "utf8" });
 
 	if (typeof content !== "string") {
 		return JSON.stringify(content);
