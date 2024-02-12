@@ -2,12 +2,19 @@ import { lt } from "semver";
 
 import { appConfig } from "@config/constant";
 import type { JsonVersion } from "src/types";
+
+import { Errors, errorMessages } from "./errors";
 import { readFileAsJson } from "./io";
 
 export const getFrameworkVersion = async (): Promise<JsonVersion> => {
-	const framework = (await readFileAsJson(appConfig.composerPath)).packages?.find(
-		({ name }) => name === appConfig.framework
-	) as JsonVersion;
+	const content = await readFileAsJson(appConfig.composerPath);
+	const framework = content.packages?.find(({ name }) => {
+		return name === appConfig.framework;
+	}) as JsonVersion;
+
+	if (typeof framework?.version !== "string") {
+		throw new Error(errorMessages(Errors.CompatibleFrameworkNotFound));
+	}
 
 	if (lt(framework.version, appConfig.frameworkCompatibleVersion)) {
 		throw new Error(
