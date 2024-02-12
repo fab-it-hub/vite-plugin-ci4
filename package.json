@@ -39,6 +39,7 @@
     "dist"
   ],
   "scripts": {
+    "lint": "eslint --ext .ts ./src ./tests",
     "prebuild": "rm -rf dist",
     "build": "tsc --emitDeclarationOnly --project tsconfig.build.json",
     "postbuild": "bun run build.config.ts"
