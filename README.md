@@ -103,8 +103,9 @@ export default defineConfig(({ mode }): UserConfig => {
 
 ## TODO
 
+- [x] Basic Tests.
 - [ ] Better Documentation.
-- [ ] Add Tests.
+- [ ] Tests for all files & functions.
 - [ ] Many More.
 
 ## Credits
