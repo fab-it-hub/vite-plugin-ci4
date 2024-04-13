@@ -53,6 +53,8 @@ export default {
 
 ## Configuration
 
+### Vite Config
+
 You can customize the plugin by passing options during initialization:
 
 ```javascript
@@ -68,6 +70,15 @@ export default {
     })
   ]
 };
+```
+
+### Git Ignore
+
+The `hot` file is created and deleted when the vite dev server is run, making it safe to ignore it. You can change the `hot` file path by update the config `hotFile` by default it's `public/hot` and add the path in the `.gitignore`.
+
+```dockerfile
+# @fabithub/vite-plugin-ci4
+public/hot
 ```
 
 ## Options
