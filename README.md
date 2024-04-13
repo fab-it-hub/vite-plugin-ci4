@@ -2,6 +2,17 @@
 
 > Vite Plugin for CodeIgniter 4 integration. Inspired by Laravel's Vite Plugin.
 
+
+[![fab-it-hub - vite-plugin-ci4](https://img.shields.io/badge/%40fab--it--hub-vite_plugin_ci4-blue?style=for-the-badge&logo=github)](https://github.com/fab-it-hub/vite-plugin-ci4 "Go to GitHub repo")
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/fab-it-hub/vite-plugin-ci4?style=for-the-badge&logo=github)
+[![GitHub Repo stars](https://img.shields.io/github/stars/fab-it-hub/vite-plugin-ci4?style=for-the-badge&logo=github)](https://github.com/fab-it-hub/vite-plugin-ci4)
+[![GitHub forks](https://img.shields.io/github/forks/fab-it-hub/vite-plugin-ci4?style=for-the-badge&logo=github&color=pink)](https://github.com/fab-it-hub/vite-plugin-ci4)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/fab-it-hub/vite-plugin-ci4/tests.yml?style=for-the-badge&logo=github%20actions)](https://github.com/fab-it-hub/vite-plugin-ci4/actions/workflows/tests.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/fab-it-hub/vite-plugin-ci4?sort=date&display_name=release&style=for-the-badge)](https://www.npmjs.com/package/@fabithub/vite-plugin-ci4)
+[![NPM Downloads](https://img.shields.io/npm/dy/%40fabithub%2Fvite-plugin-ci4?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@fabithub/vite-plugin-ci4)![Static Badge](https://img.shields.io/badge/made_with_Bun-bun?style=for-the-badge&logo=bun&logoColor=%23fbf0df&color=%23000)
+![GitHub License](https://img.shields.io/github/license/fab-it-hub/vite-plugin-ci4?style=for-the-badge&logo=github)
+
+
 ## Introduction
 
 This Vite plugin allows seamless integration of [Vite JS](https://vitejs.dev/) with [CodeIgniter 4](https://codeigniter.com/), providing enhanced development and build processes for your web applications.
@@ -125,6 +136,6 @@ This plugin is inspired by [Laravel's vite-plugin](https://github.com/laravel/vi
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md) .
+Released under [MIT](/LICENSE.md) by [@fab-it-hub](https://github.com/fab-it-hub).
 
 > This project was created using `bun init` in bun v1.0.25. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
