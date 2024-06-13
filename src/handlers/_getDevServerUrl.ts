@@ -1,8 +1,8 @@
-import type { AddressInfo } from 'net'
-import type { ResolvedConfig } from 'vite'
-
 import { HTTP_PROTOCOLS } from '@config/http'
 import { isIpv6 } from '@utils/uri'
+
+import type { AddressInfo } from 'node:net'
+import type { ResolvedConfig } from 'vite'
 
 export const _getDevServerUrl = (address: AddressInfo, config: ResolvedConfig): string => {
 	const configHmrProtocol =
@@ -24,5 +24,5 @@ export const _getDevServerUrl = (address: AddressInfo, config: ResolvedConfig): 
 		typeof config.server.hmr === 'object' ? config.server.hmr.clientPort : null
 	const port = configHmrClientPort ?? address.port
 
-	return config.server?.origin ?? `${protocol}://${host}:${port}`
+	return config.server?.origin ?? `${protocol}://${host === '[::1]' ? 'localhost' : host}:${port}`
 }
