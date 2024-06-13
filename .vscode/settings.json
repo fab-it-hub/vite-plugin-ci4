@@ -1,23 +1,23 @@
 {
-    "cSpell.words": [
-      "bumpp",
-      "linebreak",
-      "outdir",
-      "outfile",
-      "picocolors",
-      "postbuild"
-    ],
-    "conventionalCommits.scopes": [
-      "deps",
-      "src",
-      "docs",
-      "build",
-      "utils",
-      "config",
-      "handlers",
-      "template"
-    ],
-    "yaml.schemas": {
-      "https://json.schemastore.org/github-issue-config.json": ".github/ISSUE_TEMPLATE/config.yml"
-    },
-  }
+  "cSpell.words": [
+    "bumpp",
+    "linebreak",
+    "outdir",
+    "outfile",
+    "picocolors",
+    "postbuild",
+    "codeigniter",
+    "biomejs",
+    "lockb"
+  ],
+  "conventionalCommits.scopes": [
+    "deps",
+    "src",
+    "docs",
+    "build",
+    "utils",
+    "config",
+    "handlers",
+    "template"
+  ],
+}
