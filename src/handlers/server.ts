@@ -1,36 +1,36 @@
-import type { ViteDevServer } from "vite";
+import type { ViteDevServer } from 'vite'
 
-import { writingFile } from "@utils/io";
-import { joinPaths } from "@utils/string";
-import { isAddressInfo } from "@utils/uri";
-import { appConfig } from "@config/constant";
-import { Errors, errorMessages } from "@utils/errors";
+import { appConfig } from '@config/constant'
+import { Errors, errorMessages } from '@utils/errors'
+import { writingFile } from '@utils/io'
+import { joinPaths } from '@utils/string'
+import { isAddressInfo } from '@utils/uri'
 
-import { _handleLogger } from "./_logger";
-import { _handleExitProcess } from "./_processes";
-import { _getDevServerUrl } from "./_getDevServerUrl";
-import { _handleDevServer } from "./_handleDevServer";
+import { _getDevServerUrl } from './_getDevServerUrl'
+import { _handleDevServer } from './_handleDevServer'
+import { _handleLogger } from './_logger'
+import { _handleExitProcess } from './_processes'
 
 export const handleConfigureServer = (
 	server: ViteDevServer
 ): (() => void) | void | Promise<(() => void) | void> => {
-	const { publicDirectory, hotFile } = appConfig;
-	const hotFilePath = joinPaths(publicDirectory, hotFile);
+	const { publicDirectory, hotFile } = appConfig
+	const hotFilePath = joinPaths(publicDirectory, hotFile)
 
-	server.httpServer?.once("listening", () => {
-		const address = server.httpServer?.address();
+	server.httpServer?.once('listening', () => {
+		const address = server.httpServer?.address()
 
 		if (isAddressInfo(address)) {
 			writingFile(hotFilePath, _getDevServerUrl(address, server.config))
 				.then(() => _handleLogger(server))
 				.catch(() => {
-					server.config.logger.error(errorMessages(Errors.UnableToWriteHotFile));
-					server.close();
-				});
+					server.config.logger.error(errorMessages(Errors.UnableToWriteHotFile))
+					server.close()
+				})
 		}
-	});
+	})
 
-	_handleExitProcess();
+	_handleExitProcess()
 
-	return () => _handleDevServer(server);
-};
+	return () => _handleDevServer(server)
+}

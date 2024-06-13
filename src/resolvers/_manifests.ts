@@ -1,5 +1,5 @@
-import type { UserConfig } from "vite";
-import { appConfig } from "@config/constant";
+import { appConfig } from '@config/constant'
+import type { UserConfig } from 'vite'
 
 export const _resolveManifest = (
 	config: UserConfig,
@@ -8,4 +8,4 @@ export const _resolveManifest = (
 ): string | boolean =>
 	ssrManifest
 		? config.build?.ssrManifest ?? (isSSR ? appConfig.ssrManifestPath : false)
-		: config.build?.manifest ?? (isSSR ? false : appConfig.manifestPath);
+		: config.build?.manifest ?? (isSSR ? false : appConfig.manifestPath)

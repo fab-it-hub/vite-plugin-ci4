@@ -1,7 +1,7 @@
-import type { UserConfig } from "vite";
+import type { UserConfig } from 'vite'
 
-import { joinPaths } from "@utils/string";
-import type { PluginConfig } from "src/types";
+import { joinPaths } from '@utils/string'
+import type { PluginConfig } from 'src/types'
 
 export const _resolveOutDir = (
 	config: UserConfig,
@@ -10,4 +10,4 @@ export const _resolveOutDir = (
 ): string | undefined =>
 	config.build?.rollupOptions?.input ?? isSSR
 		? pluginConfig.ssrOutputDirectory
-		: joinPaths(pluginConfig.publicDirectory, pluginConfig.buildDirectory);
+		: joinPaths(pluginConfig.publicDirectory, pluginConfig.buildDirectory)

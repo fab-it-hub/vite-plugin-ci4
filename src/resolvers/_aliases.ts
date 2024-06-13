@@ -1,6 +1,6 @@
+import { appConfig } from '@config/constant'
 /* eslint-disable indent */
-import type { AliasOptions, UserConfig } from "vite";
-import { appConfig } from "@config/constant";
+import type { AliasOptions, UserConfig } from 'vite'
 
 export const _resolveAliases = (config: UserConfig): AliasOptions =>
 	Array.isArray(config.resolve?.alias)
@@ -11,4 +11,4 @@ export const _resolveAliases = (config: UserConfig): AliasOptions =>
 					replacement: appConfig.alias[alias]
 				}))
 			]
-		: { ...appConfig.alias, ...config.resolve?.alias };
+		: { ...appConfig.alias, ...config.resolve?.alias }
