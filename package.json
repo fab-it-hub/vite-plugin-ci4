@@ -48,7 +48,8 @@
     "vite": "^5.0.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.5",
+    "@biomejs/biome": "1.8.1",
+    "@types/bun": "^1.1.4",
     "@types/minify": "^9.1.4",
     "@types/node": "^20.11.17",
     "@typescript-eslint/eslint-plugin": "latest",
