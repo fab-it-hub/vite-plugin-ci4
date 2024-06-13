@@ -51,18 +51,20 @@
     "@biomejs/biome": "1.8.1",
     "@types/bun": "^1.1.4",
     "@types/minify": "^9.1.4",
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.14.2",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
-    "eslint": "latest",
-    "minify": "^11.0.1",
-    "prettier": "^3.2.5",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.1"
+    "minify": "^11.2.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13"
   },
   "dependencies": {
-    "picocolors": "^1.0.0",
-    "semver": "^7.6.0",
+    "picocolors": "^1.0.1",
+    "semver": "^7.6.2",
     "vite-plugin-full-reload": "^1.1.0"
-  }
+  },
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "esbuild"
+  ]
 }
