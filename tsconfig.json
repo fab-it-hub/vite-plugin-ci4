@@ -1,32 +1,24 @@
 {
   "compilerOptions": {
-    // enable latest features
     "lib": ["ESNext"],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
-
-    // Bundler mode
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-
-    // Best practices
     "strict": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    // Some stricter flags
     "noImplicitAny": true,
     "useUnknownInCatchVariables": true,
     "noPropertyAccessFromIndexSignature": true,
+    "types": ["bun-types"],
     "outDir": "dist",
-
-    // Paths
     "baseUrl": ".",
     "paths": {
       "@config/*": ["./src/config/*"],

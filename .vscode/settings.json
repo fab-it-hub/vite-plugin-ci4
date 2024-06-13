@@ -7,8 +7,8 @@
     "picocolors",
     "postbuild",
     "codeigniter",
-    "biomejs",
-    "lockb"
+    "biome",
+    "lock"
   ],
   "conventionalCommits.scopes": [
     "deps",
@@ -19,5 +19,5 @@
     "config",
     "handlers",
     "template"
-  ],
+  ]
 }

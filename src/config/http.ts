@@ -1,5 +1,5 @@
 export enum HTTP_PROTOCOLS {
-	WSS = "wss",
-	HTTP = "http",
-	HTTPS = "https"
+	WSS = 'wss',
+	HTTP = 'http',
+	HTTPS = 'https'
 }

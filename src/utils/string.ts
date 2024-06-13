@@ -1,3 +1,3 @@
-import { join } from "path";
+import { join } from 'path'
 
-export const joinPaths = (...paths: string[]): string => join(...paths);
+export const joinPaths = (...paths: string[]): string => join(...paths)

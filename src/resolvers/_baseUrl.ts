@@ -1,6 +1,6 @@
-import type { ConfigEnv, UserConfig } from "vite";
-import type { PluginConfig } from "src/types";
-import { addSlash } from "@utils/uri";
+import { addSlash } from '@utils/uri'
+import type { PluginConfig } from 'src/types'
+import type { ConfigEnv, UserConfig } from 'vite'
 
 export const _resolveBaseUrl = (
 	env: ConfigEnv,
@@ -9,6 +9,6 @@ export const _resolveBaseUrl = (
 	assetUrl: string
 ): string =>
 	config.base ??
-	(env.command === "build"
+	(env.command === 'build'
 		? addSlash(assetUrl).concat(addSlash(pluginConfig.buildDirectory))
-		: "");
+		: '')

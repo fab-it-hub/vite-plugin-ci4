@@ -1,90 +1,90 @@
-import type { AddressInfo } from "net";
-import type { ConfigEnv, Plugin, UserConfig } from "vite";
-import type { Config as FullReloadConfig } from "vite-plugin-full-reload";
+import type { AddressInfo } from 'net'
+import type { ConfigEnv, Plugin, UserConfig } from 'vite'
+import type { Config as FullReloadConfig } from 'vite-plugin-full-reload'
 
-import type { HTTP_PROTOCOLS } from "@config/http";
+import type { HTTP_PROTOCOLS } from '@config/http'
 
-export type JsonVersion = Record<"name" | "version", string>;
+export type JsonVersion = Record<'name' | 'version', string>
 
 export interface ComposerJson extends JsonVersion {
-	packages?: JsonVersion[];
+	packages?: JsonVersion[]
 }
 
-export type IsAddressInfo = (x?: string | AddressInfo | null) => x is AddressInfo;
+export type IsAddressInfo = (x?: string | AddressInfo | null) => x is AddressInfo
 
-export type DevServerUrl = `${HTTP_PROTOCOLS}://${string}:${number}`;
+export type DevServerUrl = `${HTTP_PROTOCOLS}://${string}:${number}`
 
 export interface AppConfig {
-	hotFile: string;
-	buildDirectory: string;
-	publicDirectory: string;
-	ssrOutputDirectory: string;
+	hotFile: string
+	buildDirectory: string
+	publicDirectory: string
+	ssrOutputDirectory: string
 
-	alias: Record<string, string>;
-	refreshPaths: string[];
+	alias: Record<string, string>
+	refreshPaths: string[]
 
-	manifestPath: string;
-	ssrManifestPath: string;
+	manifestPath: string
+	ssrManifestPath: string
 
-	plugin: string;
-	pluginName: string;
+	plugin: string
+	pluginName: string
 
-	framework: string;
-	frameworkName: string;
-	frameworkCompatibleVersion: string;
+	framework: string
+	frameworkName: string
+	frameworkCompatibleVersion: string
 
-	composerPath: string;
-	serverListener: string;
-	packageJsonPath: string;
+	composerPath: string
+	serverListener: string
+	packageJsonPath: string
 
-	assets: string;
-	placeholder: string;
-	placeholderRegExp: string | RegExp;
+	assets: string
+	placeholder: string
+	placeholderRegExp: string | RegExp
 }
 
 export interface RefreshConfig {
-	paths: string[];
-	config?: FullReloadConfig;
+	paths: string[]
+	config?: FullReloadConfig
 }
 
 export interface PluginConfig {
 	/**
 	 * The path or paths of the entry points to compile.
 	 */
-	input: string | string[];
+	input: string | string[]
 
 	/**
 	 * Project's public directory.
 	 *
 	 * @default 'public'
 	 */
-	publicDirectory?: string;
+	publicDirectory?: string
 
 	/**
 	 * The public subdirectory where compiled assets should be written.
 	 *
 	 * @default 'build'
 	 */
-	buildDirectory?: string;
+	buildDirectory?: string
 
 	/**
 	 * The path to the "hot" file.
 	 *
 	 * @default `${publicDirectory}/hot`
 	 */
-	hotFile?: string;
+	hotFile?: string
 
 	/**
 	 * The path of the SSR entry point.
 	 */
-	ssr?: string | string[];
+	ssr?: string | string[]
 
 	/**
 	 * The directory where the SSR bundle should be written.
 	 *
 	 * @default 'writable/ssr'
 	 */
-	ssrOutputDirectory?: string;
+	ssrOutputDirectory?: string
 
 	/**
 	 * Configuration for performing full page refresh on blade (or other) file changes.
@@ -92,14 +92,14 @@ export interface PluginConfig {
 	 * {@link https://github.com/ElMassimo/vite-plugin-full-reload}
 	 * @default false
 	 */
-	refresh?: boolean | string | string[] | RefreshConfig | RefreshConfig[];
+	refresh?: boolean | string | string[] | RefreshConfig | RefreshConfig[]
 
 	/**
 	 * Transform the code while serving.
 	 */
-	transformOnServe?: (code: string, url: string) => string;
+	transformOnServe?: (code: string, url: string) => string
 }
 
 export interface Ci4Plugin extends Plugin {
-	config: (config: UserConfig, env: ConfigEnv) => UserConfig;
+	config: (config: UserConfig, env: ConfigEnv) => UserConfig
 }

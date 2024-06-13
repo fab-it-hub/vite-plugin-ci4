@@ -2,13 +2,7 @@
   "name": "@fabithub/vite-plugin-ci4",
   "version": "1.1.0",
   "description": "Vite Plugin for CodeIgniter 4 integration.",
-  "keywords": [
-    "vite",
-    "ci4",
-    "codeigniter",
-    "inertia",
-    "plugin"
-  ],
+  "keywords": ["vite", "ci4", "codeigniter", "inertia", "plugin"],
   "homepage": "https://github.com/fab-it-hub/vite-plugin-ci4",
   "repository": {
     "type": "git",
@@ -35,9 +29,7 @@
     "default": "./dist/index.js",
     "types": "./dist/index.d.ts"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "lint": "eslint --ext .ts ./src ./tests",
     "prebuild": "rm -rf dist",
@@ -52,6 +44,7 @@
     "@types/bun": "^1.1.4",
     "@types/minify": "^9.1.4",
     "@types/node": "^20.14.2",
+    "@types/semver": "^7.5.8",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "minify": "^11.2.0",
@@ -63,8 +56,5 @@
     "semver": "^7.6.2",
     "vite-plugin-full-reload": "^1.1.0"
   },
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "esbuild"
-  ]
+  "trustedDependencies": ["@biomejs/biome", "esbuild"]
 }
