@@ -1,7 +1,6 @@
-import { constants, access, readFile, rm, writeFile } from 'fs/promises'
-import { normalizePath } from 'vite'
-
+import { access, constants, readFile, unlink, writeFile } from 'node:fs/promises'
 import type { ComposerJson } from 'src/types'
+import { normalizePath } from 'vite'
 import { isBunRunning } from './bun'
 
 export const isFileExists = async (path: string): Promise<boolean> => {
@@ -70,16 +69,11 @@ export const removeFile = async (filepath: string): Promise<boolean> => {
 	// Normalize the file path to ensure that it is in a consistent format.
 	const path = normalizePath(filepath)
 
-	// Check if the file exists before attempting to remove it.
-	if (!(await isFileExists(path))) {
-		throw new Error(path + ' not found.')
-	}
-
 	// Attempt to remove the file.
 	try {
 		// Use the `rm` function from the `fs/promises` library to remove the file.
 		// The `force` option is used to ensure that the file is removed, even if it is read-only.
-		return typeof (await rm(path, { force: true })) === 'undefined'
+		return typeof (await unlink(path)) === 'undefined'
 	} catch (_error: unknown) {
 		// If an error occurred while attempting to remove the file, return `false`.
 		return false
