@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, mock, spyOn } from 'bun:test'
 import { isFileExists, readFileAsJson, readFileAsString, removeFile, writingFile } from '@utils/io'
+import { afterEach, beforeEach, describe, expect, it, mock, spyOn } from 'bun:test'
 
 const existsTextFile = 'exists-file.txt'
 const nonExistsFile = 'non-exists-file.txt'
@@ -14,7 +14,6 @@ const stringContent = 'this is a txt file with dummy content.'
 describe('IO Functions', () => {
 	afterEach(() => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
 		process.versions.bun = Bun.version
 		mock.restore()
 	})
@@ -42,7 +41,7 @@ describe('IO Functions', () => {
 
 			spyOn(global.Bun, 'write').mockResolvedValue(45)
 
-			mock.module('fs/promises', () => ({ rm: () => Promise.resolve() }))
+			mock.module('fs/promises', () => ({ unlink: () => Promise.resolve() }))
 		})
 
 		describe('isFileExists', () => {
@@ -60,7 +59,7 @@ describe('IO Functions', () => {
 				expect(await readFileAsString(existsTextFile)).toBe(stringContent)
 			})
 
-			it('should throw an error if the file does not exists', () =>
+			it('should throw an error if the file does not exists', async () =>
 				expect(async () => await readFileAsString(nonExistsFile)).toThrow(
 					nonExistsFile + ' not found.'
 				))
@@ -92,10 +91,8 @@ describe('IO Functions', () => {
 			it('should remove existing file', async () =>
 				expect(await removeFile(existsTextFile)).toBeTrue())
 
-			it('should throw an error if the file does not exists', () =>
-				expect(async () => await removeFile(nonExistsFile)).toThrow(
-					nonExistsFile + ' not found.'
-				))
+			it('should throw an error if the file does not exists', async () =>
+				expect(await removeFile(nonExistsFile)).toBeTrue())
 		})
 	})
 
@@ -108,6 +105,7 @@ describe('IO Functions', () => {
 				rm: () => Promise.resolve(),
 				mkdir: () => Promise.resolve(),
 				lstat: () => Promise.resolve(),
+				unlink: () => Promise.resolve(),
 				readdir: () => Promise.resolve(),
 				default: () => Promise.resolve(),
 				realpath: () => Promise.resolve(),
@@ -177,10 +175,8 @@ describe('IO Functions', () => {
 			it('should remove existing file', async () =>
 				expect(await removeFile(existsTextFile)).toBeTrue())
 
-			it('should throw an error if the file does not exists', () =>
-				expect(async () => await removeFile(nonExistsFile)).toThrow(
-					nonExistsFile + ' not found.'
-				))
+			it('should throw an error if the file does not exists', async () =>
+				expect(await removeFile(nonExistsFile)).toBeTrue())
 		})
 	})
 })
