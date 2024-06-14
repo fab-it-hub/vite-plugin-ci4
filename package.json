@@ -1,6 +1,6 @@
 {
   "name": "@fabithub/vite-plugin-ci4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Vite Plugin for CodeIgniter 4 integration.",
   "keywords": ["vite", "ci4", "codeigniter", "inertia", "plugin"],
   "homepage": "https://github.com/fab-it-hub/vite-plugin-ci4",
